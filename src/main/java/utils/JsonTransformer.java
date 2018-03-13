@@ -7,7 +7,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import spark.ResponseTransformer;
-
+/*
+ * Implements ResponseTransformer from Spark framework and converts POJOs to JSON and vice versa
+ */
 public class JsonTransformer implements ResponseTransformer {
 	@Override
 	public String render(Object model) throws Exception {

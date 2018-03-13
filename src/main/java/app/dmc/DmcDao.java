@@ -9,14 +9,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import spark.Request;
 import utils.FileOpsUtil;
-
+/*
+ * This is the Data Access class for DMC data. 
+ * It accesses the data store and brings the requested data
+ */
 public class DmcDao {
 
+	//Reads JSON file and reads all data into the model object
 	public DmcModel[] getAllDmcRecords() {
 		DmcModel[] annData = readJsonFile("dataSource/dmc.json");
 		return annData;
 	}
-
+	//File reading utility method
 	private DmcModel[] readJsonFile(String fileName) {
 		ClassLoader classLoader = getClass().getClassLoader();
 		InputStream inputStream = classLoader.getResourceAsStream(fileName);
@@ -30,12 +34,12 @@ public class DmcDao {
 		}
 		return annData;
 	}
-
+	//Returns a single record by ID
 	public DmcModel getOneDmcRecord(Request req) {
 		DmcModel[] annData = getAllDmcRecords();
 		return annData[Integer.parseInt(req.params("id"))];
 	}
-
+	//Searches records by given keyword
 	public List<DmcModel> searchDmcRecord(Request req) {
 		DmcModel[] annData = getAllDmcRecords();
 		List<DmcModel> searchResults = new ArrayList<>();

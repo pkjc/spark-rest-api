@@ -1,7 +1,9 @@
 package utils;
 
 import spark.*;
-
+/*
+ * Intercepts every request coming to the server to clean up the request
+ */
 public class Filters {
 
     // If a user manually manipulates paths and forgets to add

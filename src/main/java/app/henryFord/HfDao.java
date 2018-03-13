@@ -9,14 +9,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import spark.Request;
 import utils.FileOpsUtil;
-
+/*
+ * This is the Data Access class for HF data. 
+ * It accesses the data store and brings the requested data
+ */
 public class HfDao {
 
+	//Reads JSON file and reads all data into the model object
 	public HfModel[] getAllHfRecords() {
 		HfModel[] annData = readJsonFile("dataSource/hf.json");
 		return annData;
 	}
-
+	//File reading utility method
 	private HfModel[] readJsonFile(String fileName) {
 		ClassLoader classLoader = getClass().getClassLoader();
 		InputStream inputStream = classLoader.getResourceAsStream(fileName);
@@ -30,7 +34,7 @@ public class HfDao {
 		}
 		return annData;
 	}
-
+	//Returns a single record by ID
 	public HfModel getOneHfRecord(Request req) {
 		HfModel[] annData = getAllHfRecords();
 		if(Integer.parseInt(req.params("id")) < annData.length){
@@ -39,7 +43,7 @@ public class HfDao {
 			return null;
 		}
 	}
-
+	//Searches records by given keyword
 	public List<HfModel> searchHfRecord(Request req) {
 		HfModel[] annData = getAllHfRecords();
 		List<HfModel> searchResults = new ArrayList<>();
